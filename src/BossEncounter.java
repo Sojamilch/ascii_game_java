@@ -1,0 +1,2 @@
+public class BossEncounter {
+}
