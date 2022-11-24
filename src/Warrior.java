@@ -1,5 +1,8 @@
 public class Warrior extends Classes {
 
+    int attackDamage; // Damage of the attack
+    int staminaCost; // Stamina cost said attack
+
     public Warrior() {
         health = 110;
         stamina = 100;
@@ -40,16 +43,25 @@ public class Warrior extends Classes {
 
     public int bigStrike() {
 
-        if (useStamina(50) == -1) {
-            return -1;
+        attackDamage = 20;
+        staminaCost = 50;
+
+        if (useStamina(staminaCost) == -1) {
+            attackDamage = -1;
         }
 
-        return 50;
+        return attackDamage;
     }
 
     public int smallStrike() {
-        useStamina(25);
-        return 10;
+
+        attackDamage = 10;
+        staminaCost = 25;
+
+        if (useStamina(staminaCost) == -1) {
+            attackDamage = -1;
+        }
+        return attackDamage;
     }
 
     public void endTurn() {
@@ -57,12 +69,12 @@ public class Warrior extends Classes {
     }
 
     public int useStamina(int staminaUsage) {
-        if ((stamina - staminaUsage) < 1) {
-            return -1;
+        if ((stamina - staminaUsage) < 0) {
+            return -1; // Not enough stamina to attack
         } else {
             stamina -= staminaUsage;
+            return 0;
         }
-        return 0;
     }
 
 }

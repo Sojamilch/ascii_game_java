@@ -34,7 +34,7 @@ public class Game implements Runnable {
                 System.out.println(
                         "\nYou win! Onto the next fight\nYou are " + (6 - currentLevel) + " encounters from the boss.");
                 pause();
-                System.out.println("\033\143");
+                clear();
             } else {
                 System.out.println("You were killed....\nHighest encounter reached: " + currentLevel + "/" + 6);
                 break;
@@ -76,15 +76,14 @@ public class Game implements Runnable {
 
     // sets the players class
     public void playerSetup(int classChoice) {
+        clear();
         switch (classChoice) {
-
-            // "\033\143" clears the console
             case 1:
-                System.out.println("\033\143You picked Warrior! Crush them ALL! ");
+                System.out.println("You picked Warrior! Crush them ALL! ");
                 player.currentClass = new Warrior();
                 break;
             case 2:
-                System.out.println("\033\143You picked Mage! Blow them UP!");
+                System.out.println("You picked Mage! Blow them UP!");
                 player.currentClass = new Mage();
                 break;
         }
@@ -98,6 +97,11 @@ public class Game implements Runnable {
             userInput.nextLine();
         } catch (Exception e) {
         }
+    }
+
+    public void clear() {
+        // "\033\143" clears the console
+        System.out.println("\033\143");
     }
 
 }

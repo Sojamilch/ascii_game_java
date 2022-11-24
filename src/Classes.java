@@ -13,6 +13,7 @@ abstract public class Classes {
 
     abstract public int takeDamage(int damage);
 
+    // getters
     public int getHealth() {
         return health;
     }

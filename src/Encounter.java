@@ -27,20 +27,26 @@ public class Encounter {
     public void playerTurn() {
         turn = 0;
         int selectedMove = 0;
+        int damage = 0;
         System.out.println("\tIts your turn! Destroy them!");
 
         while (player.currentClass.getStamina() >= 1) {
+
+            damage = 0;
             System.out.println("Enemy: " + enemy);
             System.out.println("\nYou: " + player);
             System.out.println(player.currentClass.getAttacks());
 
             selectedMove = userInput.nextInt();
 
-            if (player.currentClass.attack(selectedMove) == -1) {
+            damage = player.currentClass.attack(selectedMove);
+
+            if (damage == -1) {
                 System.out.println("You do not have enough stamina to make that move");
                 pause();
+                clear();
 
-            } else if (enemy.currentClass.takeDamage(player.currentClass.attack(selectedMove)) < 1) {
+            } else if (enemy.currentClass.takeDamage(damage) < 1) {
                 System.out.println("killed");
                 break;
             }
@@ -70,6 +76,7 @@ public class Encounter {
         }
     }
 
+    // useful functions for console
     public void pause() {
         System.out.println("Press Enter to continue...");
         try {
@@ -77,6 +84,10 @@ public class Encounter {
             userInput.nextLine();
         } catch (Exception e) {
         }
+    }
+
+    public void clear() {
+        System.out.println("\033\143");
     }
 
 }
